@@ -1,0 +1,144 @@
+body {
+  background-color: #e8e8f7;
+}
+
+.login_container > .login_wrapper {
+  margin-left: 8%;
+  margin-right: 8%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_wrapper > .login_card {
+  margin-top: 9%;
+  display: inherit;
+  /* top : 15%; */
+  /* left: 30%; */
+}
+
+.login_card > .main_login {
+  background-color: white !important;
+  border: 1px solid white;
+  min-width: 380px;
+  border-radius: 4px;
+  padding: 25px 30px;
+}
+
+.main_login_header > .heading_one {
+  font-weight: 600;
+  font-size: large;
+}
+
+.main_login_header > .heading_two {
+  color: #9b9b9b;
+  font-weight: 600;
+}
+
+.main_login > .main_login_body {
+  margin-top: 30px;
+}
+
+.main_login_body > .details_userId > input,
+.details_password > input {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #8b8f91;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #e8e8f7;
+  border-radius: 3px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  height: 38px;
+  border-radius: 5px;
+  outline: white;
+}
+
+.details_password {
+  margin-top: 15px;
+}
+
+.button_wrapper > .submit_btn {
+  margin: 25px 0 0 0;
+  padding: 7px 10px;
+  border: 1px solid #efffff;
+  border-radius: 3px;
+  background: #28a745;
+  width: 100%;
+  font-size: 15px;
+  color: white;
+  display: block;
+}
+.split_button_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.otp_buttons {
+  margin: 25px 0 0 0;
+  padding: 7px 10px;
+  border: 1px solid #efffff;
+  border-radius: 3px;
+  background: #28a745;
+  width: fit-content;
+  font-size: 15px;
+  color: white;
+  display: block;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.main_login_footer {
+  margin-top: 65px;
+}
+
+.main_login_footer > p,
+.main_login_footer > span > span {
+  color: #28a745;
+  font-size: medium;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.main_login_footer > span {
+  font-size: medium;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 700px) {
+  .side_picture {
+    display: none !important;
+  }
+
+  .login_card {
+    height: 70%;
+  }
+}
+
+.forgot-sty {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+.form-sty {
+  display: flex;
+  justify-content: center;
+}
+.inp-sty {
+  height: 39px;
+  width: 300px;
+  border-radius: 8px;
+}
+.submit-sty {
+  width: 307px;
+  height: 38px;
+  border-radius: 9px;
+  color: #fff;
+  background-color: green;
+}
