@@ -5,42 +5,42 @@ import { useHistory } from "react-router-dom";
 import "../styles/login.css";
 import { Strings } from "./Helper";
 import { Alert } from "@mui/material";
-import {
-  useForgotPasswordMutation,
-  useUpdatePasswordMutation,
-} from "../redux/services/auth";
 import Otpverify from "./Otpverify";
 function Forget() {
   const { push } = useHistory();
   const [userId, setUserId] = useState("");
-  const [forgotPassword, responseInfo] = useForgotPasswordMutation();
-  const [updatePassword, upPassResponse] = useUpdatePasswordMutation();
   const [password, setPassword] = useState();
   const [conPassword, setConPassword] = useState();
   const [otpVerified, setOtpVerified] = useState(false);
   const [otpField, setOtpField] = useState(false);
   const [apiMsg, setApiMsg] = useState({});
-  const HandleSubmit = (e) => {
+  const HandleSubmit = async (e) => {
     e.preventDefault();
-    forgotPassword({ user_id: userId });
-  };
-  if (responseInfo.isSuccess) {
-    OtpVerify();
-  }
-  function OtpVerify() {
-    if (responseInfo.data.status === 200) {
+    const res = await axios.post(
+      "http://54.167.27.9:1994/api/forgotPwd/ForgotPassword",
+      {
+        user_id: userId,
+      }
+    );
+    if (res.data.status === 200) {
       setOtpField(true);
-      setApiMsg(responseInfo.data);
+      setApiMsg(res.data);
     } else {
-      setApiMsg(responseInfo.data);
+      setApiMsg(res.data);
     }
-  }
-  function passwordUpdate() {
+  };
+  async function passwordUpdate() {
     const data = {
       user_id: apiMsg.user_id,
       password: conPassword,
     };
-    updatePassword(data);
+    const res = await axios.post(
+      "http://54.167.27.9:1994/api/forgotPwd/UpdatePassword",
+      data
+    );
+    if (res.data.status === 200) {
+      push("/");
+    }
   }
   return (
     <div className="login_container">

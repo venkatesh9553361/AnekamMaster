@@ -1,24 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  currentUser:[],
-  success:false
-}
+  currentUser: [],
+  success: false,
+};
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, action) => 
-    {
-      state.currentUser =action.payload;
+    setUser: (state, action) => {
+      state.currentUser = action.payload;
       state.success = true;
-      sessionStorage.setItem("CurrentUser",JSON.stringify(action.payload))
-      sessionStorage.setItem("Success",JSON.stringify(true));
+      window.sessionStorage.setItem(
+        "CurrentUser",
+        JSON.stringify(action.payload)
+      );
+      window.sessionStorage.setItem("Success", JSON.stringify(true));
     },
-    removeUser:(state,action)=>{
+    removeUser: (state, action) => {
       state.currentUser = [];
       state.success = false;
-      sessionStorage.removeItem("CurrentUser");
-      sessionStorage.removeItem("Success");
+      window.sessionStorage.removeItem("CurrentUser");
+      window.sessionStorage.removeItem("Success");
     },
     defaultState: (state) => {
       state = initialState;
@@ -27,6 +29,6 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser, defaultState,removeUser } = authSlice.actions;
+export const { setUser, defaultState, removeUser } = authSlice.actions;
 
 export default authSlice.reducer;

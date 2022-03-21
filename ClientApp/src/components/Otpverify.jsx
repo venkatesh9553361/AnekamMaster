@@ -1,26 +1,22 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import {
-  useResendOtpMutation,
-  useVerifyOtpMutation,
-} from "../redux/services/auth";
+import axios from 'axios';
 
 function Otpverify({ apiMsg,setOtpVerified }) {
   const [otp, setOtp] = useState("");
   const { push } = useHistory();
-  const [verifyOtp, otpResponse] = useVerifyOtpMutation();
-  const [resendOtp, resendOtpRes] = useResendOtpMutation();
   const otpVerification = async (e) => {
     e.preventDefault();
-    verifyOtp({ otp: otp, user_id: apiMsg.user_id });
+    const res = await axios.post("http://54.167.27.9:1994/api/otpVerification/VerifyOtp",{otp:otp,user_id:apiMsg.user_id});
+    console.log(res);
+    if(res.data.status===200){
+      setOtpVerified(true);
+    }
   };
   const OtpResend = async (e) => {
     e.preventDefault();
-    resendOtp({ phone_no: apiMsg.phone_no, user_id: apiMsg.user_id });
+    await axios.post("http://54.167.27.9:1994/api/otpVerification/ResendOTP",{ phone_no: apiMsg.phone_no, user_id: apiMsg.user_id })
   };
-  if(otpResponse.isSuccess){
-    setOtpVerified(true);
-  }
   return (
     <div className="main_login">
       <div className="main_login_body">

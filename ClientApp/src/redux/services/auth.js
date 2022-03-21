@@ -20,15 +20,6 @@ export const authApi = createApi({
         body: data,
       }),
     }),
-    //   getPostById: builder.query({
-    //    query: (id) => {
-    //     console.log("ID:", id)
-    //     return {
-    //      url: `posts/${id}`,
-    //      method: 'GET'
-    //     }
-    //    }
-    //   }),
 
     register: builder.mutation({
       query: (data) => {
@@ -40,62 +31,49 @@ export const authApi = createApi({
       },
     }),
 
-    //   deletePost: builder.mutation({
-    //    query: (id) => {
-    //     console.log("Delete ID:", id)
+
+    // forgotPassword: builder.mutation({
+    //   query: (data) => {
     //     return {
-    //      url: `posts/${id}`,
-    //      method: 'DELETE'
+    //       url: `forgotPwd/ForgotPassword`,
+    //       method: "POST",
+    //       body: data,
+    //     };
+    //   },
+    // }),
+
+    // verifyOtp: builder.mutation({
+    //   query: (data) => {
+    //     return {
+    //       url: "otpVerification/VerifyOtp",
+    //       method: "POST",
+    //       body: data,
+    //     };
+    //   },
+    // }),
+    // resendOtp: builder.mutation({
+    //   query:(data)=>{
+    //     return {
+    //       url:"otpVerification/ResendOTP",
+    //       method:"POST",
+    //       body:data
     //     }
-    //    }
-    //   }),
-
-    forgotPassword: builder.mutation({
-      query: (data) => {
-        return {
-          url: `forgotPwd/ForgotPassword`,
-          method: "POST",
-          body: data,
-        };
-      },
-    }),
-
-    verifyOtp: builder.mutation({
-      query: (data) => {
-        return {
-          url: "otpVerification/VerifyOtp",
-          method: "POST",
-          body: data,
-        };
-      },
-    }),
-    resendOtp: builder.mutation({
-      query:(data)=>{
-        return {
-          url:"otpVerification/ResendOTP",
-          method:"POST",
-          body:data
-        }
-      }
-    }),
-    updatePassword: builder.mutation({
-      query:(data)=>{
-        return {
-          url:"forgotPwd/UpdatePassword",
-          method:"POST",
-          body:data
-        }
-      }
-    })
+    //   }
+    // }),
+    // updatePassword: builder.mutation({
+    //   query:(data)=>{
+    //     return {
+    //       url:"forgotPwd/UpdatePassword",
+    //       method:"POST",
+    //       body:data
+    //     }
+    //   }
+    // })
   }),
 });
 
 // Export hooks for usage in functional components, which are auto-generated based on the defined endpoints
 export const {
   useAuthCheckMutation,
-  useVerifyOtpMutation,
-  useForgotPasswordMutation,
   useRegisterMutation,
-  useResendOtpMutation,
-  useUpdatePasswordMutation,
 } = authApi;

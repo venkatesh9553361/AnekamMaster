@@ -3,11 +3,11 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { authApi } from "./services/auth";
 import authReducer from "./state/authSlice";
 
-const currentUser = sessionStorage.getItem("CurrentUser")
-  ? JSON.parse(sessionStorage.getItem("CurrentUser"))
+const currentUser = window.sessionStorage.getItem("CurrentUser")
+  ? JSON.parse(window.sessionStorage.getItem("CurrentUser"))
   : [];
-const success = sessionStorage.getItem("Success")
-  ? JSON.parse(sessionStorage.getItem("Success"))
+const success = window.sessionStorage.getItem("Success")
+  ? JSON.parse(window.sessionStorage.getItem("Success"))
   : "";
 const initialState = {
   auth: {
