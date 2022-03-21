@@ -50,9 +50,9 @@ const Login = () => {
                         <div className='button_wrapper'>
                                 <button className='submit_btn' type='submit' onClick={handleSubmit} >Log In</button>
                         </div>
-                        {
+                        {/* {
                             authResponse?.isError && <Alert severity="error">{authResponse.data.message}</Alert>
-                        }
+                        } */}
                     </div>
                         <div className='main_login_footer'>
                             <p onClick={() => (push("/forgot"))}>Forgot Password?</p>

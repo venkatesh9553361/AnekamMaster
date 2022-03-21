@@ -5,30 +5,42 @@ import { useHistory } from "react-router-dom";
 import "../styles/login.css";
 import { Strings } from "./Helper";
 import { Alert } from "@mui/material";
-import { useForgotPasswordMutation } from "../redux/services/auth";
+import {
+  useForgotPasswordMutation,
+  useUpdatePasswordMutation,
+} from "../redux/services/auth";
 import Otpverify from "./Otpverify";
 function Forget() {
   const { push } = useHistory();
   const [userId, setUserId] = useState("");
   const [forgotPassword, responseInfo] = useForgotPasswordMutation();
-
+  const [updatePassword, upPassResponse] = useUpdatePasswordMutation();
+  const [password, setPassword] = useState();
+  const [conPassword, setConPassword] = useState();
+  const [otpVerified, setOtpVerified] = useState(false);
   const [otpField, setOtpField] = useState(false);
   const [apiMsg, setApiMsg] = useState({});
-  const HandleSubmit = async (e) => {
+  const HandleSubmit = (e) => {
     e.preventDefault();
-    await forgotPassword({ user_id: userId });
+    forgotPassword({ user_id: userId });
   };
-  function OtpSuccess() {
-    setOtpField(true);
-    setApiMsg(responseInfo.data);
-  }
   if (responseInfo.isSuccess) {
-    if (responseInfo.data.status) {
-      OtpSuccess();
+    OtpVerify();
+  }
+  function OtpVerify() {
+    if (responseInfo.data.status === 200) {
+      setOtpField(true);
+      setApiMsg(responseInfo.data);
     } else {
       setApiMsg(responseInfo.data);
-      console.log(apiMsg);
     }
+  }
+  function passwordUpdate() {
+    const data = {
+      user_id: apiMsg.user_id,
+      password: conPassword,
+    };
+    updatePassword(data);
   }
   return (
     <div className="login_container">
@@ -40,7 +52,41 @@ function Forget() {
             </div>
           </div>
           {otpField ? (
-            <Otpverify apiMsg={apiMsg} />
+            !otpVerified ? (
+              <Otpverify apiMsg={apiMsg} setOtpVerified={setOtpVerified} />
+            ) : (
+              <div className="main_login">
+                <div className="main_login_body">
+                  <div className="details_userId">
+                    <input
+                      id="password"
+                      type="password"
+                      placeholder="New Password"
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="details_userId">
+                    <input
+                      id="password"
+                      type="password"
+                      placeholder="Confirm Password"
+                      value={conPassword}
+                      onChange={(e) => {
+                        setConPassword(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="button_wrapper">
+                    <button onClick={passwordUpdate} className="submit_btn">
+                      Submit
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )
           ) : (
             <div className="main_login">
               <div className="main_login_header">
@@ -72,7 +118,7 @@ function Forget() {
                 </div>
               </div>
               <div>
-                {/* {apiMsg?.message?.length > 0 && (
+                {apiMsg?.message?.length > 0 && (
                   <Alert
                     sx={{ width: "300px", marginTop: "10px" }}
                     severity="info"
@@ -80,7 +126,7 @@ function Forget() {
                     {" "}
                     {apiMsg}{" "}
                   </Alert>
-                )} */}
+                )}
               </div>
 
               <div className="main_login_footer" style={{ marginTop: "10px" }}>

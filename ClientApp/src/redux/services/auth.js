@@ -77,6 +77,15 @@ export const authApi = createApi({
           body:data
         }
       }
+    }),
+    updatePassword: builder.mutation({
+      query:(data)=>{
+        return {
+          url:"forgotPwd/UpdatePassword",
+          method:"POST",
+          body:data
+        }
+      }
     })
   }),
 });
@@ -88,4 +97,5 @@ export const {
   useForgotPasswordMutation,
   useRegisterMutation,
   useResendOtpMutation,
+  useUpdatePasswordMutation,
 } = authApi;

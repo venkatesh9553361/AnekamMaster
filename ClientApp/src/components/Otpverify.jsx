@@ -5,7 +5,7 @@ import {
   useVerifyOtpMutation,
 } from "../redux/services/auth";
 
-function Otpverify({ apiMsg }) {
+function Otpverify({ apiMsg,setOtpVerified }) {
   const [otp, setOtp] = useState("");
   const { push } = useHistory();
   const [verifyOtp, otpResponse] = useVerifyOtpMutation();
@@ -18,6 +18,9 @@ function Otpverify({ apiMsg }) {
     e.preventDefault();
     resendOtp({ phone_no: apiMsg.phone_no, user_id: apiMsg.user_id });
   };
+  if(otpResponse.isSuccess){
+    setOtpVerified(true);
+  }
   return (
     <div className="main_login">
       <div className="main_login_body">
