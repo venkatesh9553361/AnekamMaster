@@ -20,55 +20,6 @@ export const authApi = createApi({
         body: data,
       }),
     }),
-
-    register: builder.mutation({
-      query: (data) => {
-        return {
-          url: "register/NewUserRegistration",
-          method: "POST",
-          body: data,
-        };
-      },
-    }),
-
-
-    // forgotPassword: builder.mutation({
-    //   query: (data) => {
-    //     return {
-    //       url: `forgotPwd/ForgotPassword`,
-    //       method: "POST",
-    //       body: data,
-    //     };
-    //   },
-    // }),
-
-    // verifyOtp: builder.mutation({
-    //   query: (data) => {
-    //     return {
-    //       url: "otpVerification/VerifyOtp",
-    //       method: "POST",
-    //       body: data,
-    //     };
-    //   },
-    // }),
-    // resendOtp: builder.mutation({
-    //   query:(data)=>{
-    //     return {
-    //       url:"otpVerification/ResendOTP",
-    //       method:"POST",
-    //       body:data
-    //     }
-    //   }
-    // }),
-    // updatePassword: builder.mutation({
-    //   query:(data)=>{
-    //     return {
-    //       url:"forgotPwd/UpdatePassword",
-    //       method:"POST",
-    //       body:data
-    //     }
-    //   }
-    // })
   }),
 });
 

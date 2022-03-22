@@ -38,6 +38,8 @@ function Forget() {
       "http://54.167.27.9:1994/api/forgotPwd/UpdatePassword",
       data
     );
+
+    console.log("forgotUpdate",res);
     if (res.data.status === 200) {
       push("/");
     }
@@ -71,6 +73,7 @@ function Forget() {
                   <div className="details_userId">
                     <input
                       id="password"
+                      style={{marginTop:"15px"}}
                       type="password"
                       placeholder="Confirm Password"
                       value={conPassword}

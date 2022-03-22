@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from 'axios';
 
 function Otpverify({ apiMsg,setOtpVerified }) {
+  console.log("apimsg",apiMsg);
   const [otp, setOtp] = useState("");
   const { push } = useHistory();
   const otpVerification = async (e) => {
