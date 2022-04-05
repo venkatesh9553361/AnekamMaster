@@ -1,6 +1,20 @@
 import React from "react";
 import Sidebar from "./Sidebar";
-import { Menu, GridView, Category, Article, ShoppingCart, AirportShuttle, AttachMoney, Inventory, PersonOutline, Groups, PowerSettingsNew } from "@mui/icons-material";
+import {
+  Menu,
+  GridView,
+  Category,
+  Article,
+  ShoppingCart,
+  AirportShuttle,
+  AttachMoney,
+  Inventory,
+  PersonOutline,
+  Groups,
+  PowerSettingsNew,
+} from "@mui/icons-material";
+import Customers from "./Customers";
+import { Route,Switch } from "react-router-dom";
 function Dashboard() {
   const [openOnHover, setOpenOnHover] = React.useState(true);
   const toggleOpenOnHover = () => setOpenOnHover(!openOnHover);
@@ -37,7 +51,7 @@ function Dashboard() {
       icon: <PersonOutline />,
     },
     {
-      to: "/sales",
+      to: "/customers",
       label: "Customers",
       icon: <Groups />,
     },
@@ -48,8 +62,6 @@ function Dashboard() {
     },
   ];
 
-
-
   return (
     <Sidebar
       logo={<img src="NewFolder/logo.png" style={{ width: "100%" }} />}
@@ -57,7 +69,10 @@ function Dashboard() {
       links={links}
       toggleOpenOnHover={toggleOpenOnHover}
       openOnHover={openOnHover}
-    ></Sidebar>
+    >
+      <Switch>
+      <Route path="/customers" component={Customers} /></Switch>
+    </Sidebar>
   );
 }
 

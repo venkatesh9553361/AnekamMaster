@@ -22,7 +22,6 @@ const Login = () => {
         }
         authCheck(user);
     };
-    
     if(authResponse.isSuccess){
         dispatch(setUser(authResponse.data));
     }

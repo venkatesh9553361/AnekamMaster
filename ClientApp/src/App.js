@@ -15,7 +15,7 @@ export default function App() {
     <BrowserRouter>
       <Switch>
         {user.success ? (
-          <Route path="/" exact={true} component={Dashboard} />
+          <Route path="/" component={Dashboard} />
         ) : (
           <>
             <Route path={"/"} exact={true} component={Login} />

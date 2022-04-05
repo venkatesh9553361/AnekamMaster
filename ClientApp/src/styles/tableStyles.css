@@ -1,0 +1,27 @@
+table {
+  width: 100%;
+  font-size: 15px;
+  border: 1px solid #EDEDF9;
+}
+table thead th {
+  background-color: #00963f;
+  color: white;
+  text-align: center;
+}
+table tr:nth-child(odd) {
+  background-color: #efefff;
+}
+table tr {
+  height: 45px;
+}
+tbody tr td {
+  text-align: center;
+}
+tbody tr td button {
+  all: unset;
+  width: 20px;
+  height: 20px;
+  margin: 3px;
+  padding: 3px;
+  overflow: hidden;
+}
