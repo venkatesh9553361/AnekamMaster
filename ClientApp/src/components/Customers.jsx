@@ -9,7 +9,34 @@ import Modal from "./Modal";
 function Customers() {
   const { currentUser } = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
-  const [editData, setEditData] = useState({});
+  const initialState = {
+    name: "",
+    phone: "",
+    land_mark: "",
+    state: "",
+    address: "",
+    email: "",
+    phone: "",
+    pin_code: "",
+    cust_gstn: "",
+    city: "",
+  };
+  const [form, setForm] = useState(initialState);
+  function setEditValues(row) {
+    setForm({
+      name: row.name,
+      phone: row.phone,
+      land_mark: row.land_mark,
+      state: row.state,
+      address: row.address,
+      email: row.email,
+      phone: row.phone,
+      pin_code: row.pin_code,
+      cust_gstn: row.cust_gstn,
+      city: row.city,
+    });
+  }
+  const [toggleAddr, setToggleAddr] = useState(false);
   function openModal() {
     setIsOpen(true);
   }
@@ -43,8 +70,7 @@ function Customers() {
   useEffect(async () => {
     fetchCustomers();
   }, []);
-  async function DeleteCustomer({ row }) {
-    console.log(row);
+  async function DeleteCustomer(row) {
     try {
       const res = axios.put(
         "http://54.167.27.9:1994/api/customer/DeleteCustomer",
@@ -59,12 +85,14 @@ function Customers() {
       console.log("Delete Customer Error", error);
     }
   }
+  const [edit, setEdit] = useState(false);
   const actions = (row) => (
     <>
       <button
         onClick={() => {
           openModal();
-          setEditData(row);
+          setEdit(true);
+          setEditValues(row);
         }}
         style={{ background: "#00963F" }}
       >
@@ -78,6 +106,41 @@ function Customers() {
       </button>
     </>
   );
+  async function updateCustomer() {
+    try {
+      const res = await axios.put(
+        "http://54.167.27.9:1994/api/customer/UpdateCustomerProfile",
+        form,
+        {
+          headers: headers,
+        }
+      );
+      console.log("Edit REsponse", res);
+      if (res.data.status === 200) closeModal();
+      fetchCustomers();
+    } catch (error) {
+      console.log("Edit Api", error);
+    }
+  }
+  async function addCustomer() {
+    try {
+      const res = await axios.post(
+        "http://54.167.27.9:1994/api/customer/NewCustomer",
+        form,
+        {
+          headers: headers,
+        }
+      );
+      console.log("Add Custo REsponse", res);
+      if (res.data.status === 200) closeModal();
+      fetchCustomers();
+    } catch (error) {
+      console.log("Add Custo Api", error);
+    }
+  }
+  function handleChange(e) {
+    setForm((form) => ({ ...form, [e.target.name]: e.target.value }));
+  }
   return (
     <div className="customers_main">
       <div className="customers_header">
@@ -92,7 +155,14 @@ function Customers() {
           </div>
         </div>
         <div className="cus_head_second">
-          <button onClick={openModal} className="success_btn">
+          <button
+            onClick={() => {
+              openModal();
+              setEdit(false);
+              setForm(initialState);
+            }}
+            className="success_btn"
+          >
             {" "}
             + Add Customers
           </button>
@@ -112,7 +182,134 @@ function Customers() {
           />
         )}
       </div>
-      <Modal isOpen={isOpen} onClose={closeModal}></Modal>
+      <Modal isOpen={isOpen} onClose={closeModal}>
+        <div className="modal-header">
+          <h3>{edit ? "Edit" : "Add"}Customer</h3>
+          <button onClick={closeModal}>&#x2715;</button>
+        </div>
+        <div className="input-wrapper">
+          <label htmlFor="name">Customer Name</label>
+          <input
+            onChange={handleChange}
+            value={form.name}
+            type="text"
+            name="name"
+            id="name"
+          />
+        </div>
+        <div className="input-wrapper">
+          <label htmlFor="email">Email</label>
+          <input
+            onChange={handleChange}
+            value={form.email}
+            type="email"
+            name="email"
+            id="email"
+          />
+        </div>
+        <div className="input-wrapper">
+          <label htmlFor="phone">Mobile No</label>
+          <input
+            onChange={handleChange}
+            value={form.phone}
+            type="tel"
+            name="phone"
+            id="phone"
+          />
+        </div>
+        <div className="input-wrapper">
+          <label htmlFor="gstin">GST</label>
+          <input
+            onChange={handleChange}
+            value={form.cust_gstn}
+            type="text"
+            name="cust_gstn"
+            id="gstin"
+          />
+        </div>
+        <div className="modal_button_wrapper">
+          <small>Do you want to add address for this customer?</small>
+          <button
+            style={{
+              padding: "3px",
+              border: "1px solid black",
+            }}
+            onClick={() => setToggleAddr(!toggleAddr)}
+          >
+            {toggleAddr ? "Hide" : "Show"}
+          </button>
+        </div>
+        {toggleAddr ? (
+          <>
+            <div className="input-wrapper">
+              <label htmlFor="address">Address</label>
+              <input
+                onChange={handleChange}
+                value={form.address}
+                type="text"
+                name="address"
+                id="address"
+              />
+            </div>
+            <div className="input-wrapper">
+              <label htmlFor="landmark">Landamark</label>
+              <input
+                onChange={handleChange}
+                value={form.land_mark}
+                type="text"
+                name="land_mark"
+                id="landmark"
+              />
+            </div>
+            <div className="input-wrapper">
+              <label htmlFor="state">State</label>
+              <select
+                onChange={handleChange}
+                value={form.state}
+                name="state"
+                id="state"
+              ></select>
+            </div>
+            <div className="input-wrapper">
+              <label htmlFor="city">City</label>
+              <input
+                onChange={handleChange}
+                value={form.city}
+                type="text"
+                name="city"
+                id="city"
+              />
+            </div>
+            <div className="input-wrapper">
+              <label htmlFor="zipcode">Zipcode</label>
+              <input
+                onChange={handleChange}
+                value={form.pin_code}
+                type="number"
+                name="pin_code"
+                id="zipcode"
+              />
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+        <div className="modal-footer">
+          <button
+            className="success_btn"
+            onClick={edit ? updateCustomer : addCustomer}
+          >
+            Submit
+          </button>
+          <button
+            className="success_btn"
+            style={{ background: "#F1388B" }}
+            onClick={closeModal}
+          >
+            Cancel
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }

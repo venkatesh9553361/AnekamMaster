@@ -1,5 +1,5 @@
 import React from "react";
-import '../styles/modal.css'
+import "../styles/modal.css";
 function Modal({ isOpen, children, onClose }) {
   if (isOpen === false) return null;
   function close(e) {
@@ -9,10 +9,11 @@ function Modal({ isOpen, children, onClose }) {
     }
   }
   return (
-    <div>
-      <div className="modal">{children}</div>
+    <>
+      {" "}
+      <div className="custom-modal">{children}</div>
       <div className="bg" onClick={(e) => close(e)} />
-    </div>
+    </>
   );
 }
 export default Modal;
