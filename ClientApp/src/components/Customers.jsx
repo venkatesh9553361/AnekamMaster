@@ -5,7 +5,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Modal from "./Modal";
-
+import { FiEdit2, FiTrash } from "react-icons/fi";
 function Customers() {
   const { currentUser } = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
@@ -49,7 +49,13 @@ function Customers() {
   const headers = {
     authorization: secret,
   };
-  const columns = ["customer_id", "name", "email", "phone", "status"];
+  const columns = [
+    { name: "customer_id", title: "ID" },
+    { name: "name", title: "Name" },
+    { name: "email", title: "Email" },
+    { name: "phone", title: "Mobile" },
+    { name: "status", title: "Status" },
+  ];
   const [data, setData] = useState([]);
   async function fetchCustomers() {
     try {
@@ -95,14 +101,16 @@ function Customers() {
           setEditValues(row);
         }}
         style={{ background: "#00963F" }}
+        className="icon_btns"
       >
-        Edit
+        <FiEdit2 />
       </button>
       <button
         onClick={() => DeleteCustomer(row)}
+        className="icon_btns"
         style={{ background: "#FD6074" }}
       >
-        Delete
+        <FiTrash />
       </button>
     </>
   );
@@ -166,11 +174,14 @@ function Customers() {
             {" "}
             + Add Customers
           </button>
-          <button className="success_btn"> + Bulk Uploads</button>
+          <button className="success_btn"> + Upload Bulk Customers</button>
           <button className="success_outline_btn"> + Sample Excel File</button>
         </div>
       </div>
       <div className="customers_tableCard">
+        <div className="cus_float_right">
+          <input type="text" name="" placeholder="type here....." className="cus_search_input" id="" />
+        </div>
         {loading ? (
           "loading...."
         ) : (
@@ -212,7 +223,8 @@ function Customers() {
           <input
             onChange={handleChange}
             value={form.phone}
-            type="tel"
+            type="number"
+            maxLength={10}
             name="phone"
             id="phone"
           />

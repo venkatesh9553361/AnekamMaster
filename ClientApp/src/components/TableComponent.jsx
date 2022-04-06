@@ -6,7 +6,7 @@ function TableComponent({ data, columns,actions,extraCol="" }) {
       <thead>
         <tr>
           {columns.map((head) => (
-            <th>{head}</th>
+            <th>{head.title}</th>
           ))}
           <th>{extraCol}</th>
         </tr>
@@ -15,7 +15,7 @@ function TableComponent({ data, columns,actions,extraCol="" }) {
         {data.map((row) => (
           <tr>
             {columns.map((col) => (
-              <td>{row[col]}</td>
+              <td>{row[col.name]}</td>
             ))}
             <td>{actions(row)}</td>
           </tr>
