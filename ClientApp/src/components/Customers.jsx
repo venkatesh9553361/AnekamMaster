@@ -22,6 +22,7 @@ function Customers() {
     city: "",
   };
   const [form, setForm] = useState(initialState);
+  const [states, setStates] = useState([]);
   function setEditValues(row) {
     setForm({
       name: row.name,
@@ -75,6 +76,17 @@ function Customers() {
   }
   useEffect(async () => {
     fetchCustomers();
+  }, []);
+  useEffect(async () => {
+    try {
+      const res = await axios.get(
+        "http://54.167.27.9:1994/api/selection/StatesList",
+        { headers: headers }
+      );
+      setStates(res.data.rows);
+    } catch (error) {
+      console.log("States Api Errors", error);
+    }
   }, []);
   async function DeleteCustomer(row) {
     try {
@@ -180,7 +192,13 @@ function Customers() {
       </div>
       <div className="customers_tableCard">
         <div className="cus_float_right">
-          <input type="text" name="" placeholder="type here....." className="cus_search_input" id="" />
+          <input
+            type="text"
+            name=""
+            placeholder="type here....."
+            className="cus_search_input"
+            id=""
+          />
         </div>
         {loading ? (
           "loading...."
@@ -280,7 +298,11 @@ function Customers() {
                 value={form.state}
                 name="state"
                 id="state"
-              ></select>
+              >
+                {states.map((state) => (
+                  <option value={state.id}>{state.state_name}</option>
+                ))}
+              </select>
             </div>
             <div className="input-wrapper">
               <label htmlFor="city">City</label>
