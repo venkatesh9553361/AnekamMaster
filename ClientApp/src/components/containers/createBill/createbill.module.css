@@ -1,0 +1,80 @@
+.container {
+  padding: 10px 25px 0px 25px;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #a8afc7;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #e8e8f7;
+  border-radius: 3px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  height: 38px;
+  border-radius: 5px;
+}
+.input:focus {
+  color: #8f9cc0;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgb(135 96 251 / 25%);
+  border-color: #a8afc7;
+  box-shadow: none;
+}
+.inputIcons {
+  width: 33%;
+}
+.pageHeader {
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  align-items: center;
+}
+.pageBody {
+  width: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  justify-content: space-between;
+}
+.pageTitle {
+  width: 50%;
+  text-align: center;
+}
+.pageBodyLeft {
+  width: 33%;
+}
+.card {
+  width: 100%;
+  background-color: white;
+  height: max-content;
+  margin-top: 2rem;
+  padding: 20px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.pageBodyRight {
+  width: 65%;
+}
+.buttonWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

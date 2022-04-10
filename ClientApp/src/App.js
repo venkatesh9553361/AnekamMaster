@@ -8,9 +8,12 @@ import Register from "./components/register";
 import "./custom.css";
 import Dashboard from "./components/Dashboard";
 import { useSelector } from "react-redux";
+import Toast from "./components/common/alertToast/Toast";
+import useSnackabr from "./components/common/alertToast/useSnackabr";
 
 export default function App() {
   const user = useSelector((state) => state.auth);
+  const {list} = useSnackabr();
   return (
     <BrowserRouter>
       <Switch>
@@ -24,6 +27,7 @@ export default function App() {
           </>
         )}
       </Switch>
+      <Toast list={list} position="top-right" />
     </BrowserRouter>
   );
 }

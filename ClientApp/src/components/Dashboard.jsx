@@ -14,7 +14,8 @@ import {
   PowerSettingsNew,
 } from "@mui/icons-material";
 import Customers from "./Customers";
-import { Route,Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import CreateBill from "./containers/createBill/CreateBill";
 function Dashboard() {
   const [openOnHover, setOpenOnHover] = React.useState(true);
   const toggleOpenOnHover = () => setOpenOnHover(!openOnHover);
@@ -71,7 +72,9 @@ function Dashboard() {
       openOnHover={openOnHover}
     >
       <Switch>
-      <Route path="/customers" component={Customers} /></Switch>
+        <Route path="/customers" component={Customers} />
+        <Route path="/create-bill" component={CreateBill} />
+      </Switch>
     </Sidebar>
   );
 }
